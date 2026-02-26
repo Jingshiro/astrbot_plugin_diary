@@ -1,0 +1,32 @@
+{
+  "diary_prompt": {
+    "type": "string",
+    "title": "日记系统提示词模板",
+    "description": "这是让大模型写日记的核心提示词模板。可用占位符：{persona_prompt}（角色设定），{history_str}（上下文聊天记录）。",
+    "default": "你正在扮演：{persona_prompt}\n以下是今天的对话内容：\n{history_str}\n请根据以上内容，以该角色的口吻写一篇今日日记。\n要求：\n1. 使用 Markdown 格式（如删除线、加黑等）用于表现角色的心情波动，如觉得羞耻的内容会用删除线标记，阴暗的想法会用加黑标记，很重要的事情使用加粗标记。\n2. 内容贴合实际发生的对话，可以透露一些只有角色知道而用户不知道的事情\n3. 语言风格符合角色设定，日记内容需要体现角色的心理活动\n4. 日记总字数应在812-1201字区间"
+  },
+  "diary_writing_msg": {
+    "type": "string",
+    "title": "日记生成中提示语",
+    "description": "用户触发写日记命令时，立即返回给用户的提示。",
+    "default": "正在为您撰写日记中，这可能需要一点时间，请稍候..."
+  },
+  "diary_no_history_msg": {
+    "type": "string",
+    "title": "无聊天记录时的话术",
+    "description": "当用户当天没有与AI对话仍触发生成日记时，替代到 {history_str} 中的段落。",
+    "default": "今日暂无有意义的对话记录。"
+  },
+  "diary_fail_no_reply_msg": {
+    "type": "string",
+    "title": "未获得回复时的报错语",
+    "description": "模型调用成功但没有返回任何文本时的报错语。",
+    "default": "生成日记失败，模型未返回回复。"
+  },
+  "diary_fail_error_msg": {
+    "type": "string",
+    "title": "底层异常错误提示",
+    "description": "调用报错时回复给用户的提示词。可用占位符: {e} 表示异常信息。",
+    "default": "生成日记时出现错误: {e}"
+  }
+}
