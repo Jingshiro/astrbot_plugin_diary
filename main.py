@@ -440,7 +440,7 @@ class DiaryPlugin(Star):
         self,
         umo: str,
         persona_id: str,
-        client: mqtt.Client,
+        client: Any,
         down_topic: str,
         secret_key: str,
     ):
@@ -461,7 +461,7 @@ class DiaryPlugin(Star):
         umo: str,
         persona_id: str,
         date_str: str,
-        client: mqtt.Client,
+        client: Any,
         down_topic: str,
         secret_key: str,
     ):
