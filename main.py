@@ -4,6 +4,7 @@ import json
 import random
 import string
 import base64
+from typing import Any
 from astrbot.api.event import filter, AstrMessageEvent
 from astrbot.api.star import Context, Star
 from astrbot.api import logger
