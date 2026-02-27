@@ -9,6 +9,10 @@ from astrbot.api.event import filter, AstrMessageEvent
 from astrbot.api.star import Context, Star
 from astrbot.api import logger
 
+import sys
+import subprocess
+
+MQTT_AVAILABLE = False
 try:
     import paho.mqtt.client as mqtt
     from Crypto.Cipher import AES
@@ -17,10 +21,32 @@ try:
 
     MQTT_AVAILABLE = True
 except ImportError:
-    MQTT_AVAILABLE = False
     logger.warning(
-        "paho-mqtt or pycryptodome is not installed. WebUI will be disabled. Run pip install -r requirements.txt"
+        "paho-mqtt or pycryptodome is not installed. Attempting auto-installation..."
     )
+    try:
+        subprocess.check_call(
+            [
+                sys.executable,
+                "-m",
+                "pip",
+                "install",
+                "paho-mqtt==2.1.0",
+                "pycryptodome==3.20.0",
+            ]
+        )
+        logger.info("Auto-installation successful. Importing modules...")
+        import paho.mqtt.client as mqtt
+        from Crypto.Cipher import AES
+        from Crypto.Util.Padding import pad, unpad
+        import hashlib
+
+        MQTT_AVAILABLE = True
+    except Exception as e:
+        logger.error(
+            f"Auto-installation failed: {e}. WebUI will be disabled. Please run `pip install paho-mqtt pycryptodome` manually."
+        )
+        MQTT_AVAILABLE = False
 
 
 def generate_random_string(length: int = 16) -> str:
@@ -322,7 +348,7 @@ class DiaryPlugin(Star):
                 f"找不到 {date_str} 的日记哦。你可以使用 /查看日记列表 来查看所有已存的日记日期。"
             )
 
-    @filter.command("我的日记本")
+    @filter.command("查看日记本")
     async def webui_diary(self, event: AstrMessageEvent):
         """生成一个精美的跨平台在线日记本网页链接（阅后即焚）"""
         if not MQTT_AVAILABLE:

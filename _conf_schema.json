@@ -32,7 +32,7 @@
   "webui_url": {
     "type": "string",
     "title": "WebUI 地址",
-    "description": "点击 /我的日记本 生成的长链接所指向的前端地址。",
+    "description": "点击 /查看日记本 生成的长链接所指向的前端地址。",
     "default": "https://jingshiro.github.io/dairy_note/"
   }
 }
