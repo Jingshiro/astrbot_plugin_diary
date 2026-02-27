@@ -115,13 +115,13 @@ class DiaryPlugin(Star):
         index_key = f"diary_index_{umo}_{persona_id}"
         old_kv_key = f"diaries_{umo}_{persona_id}"
 
-        dates = await self.get_kv_data(index_key, default=[])
-        if dates:
+        dates = await self.get_kv_data(index_key)
+        if dates is not None:
             return dates
 
         # Migrate old data if it exists
         dates = []
-        old_data = await self.get_kv_data(old_kv_key, default={})
+        old_data = await self.get_kv_data(old_kv_key)
         if isinstance(old_data, dict):
             for d, content in old_data.items():
                 dates.append(d)
