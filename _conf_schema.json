@@ -28,5 +28,11 @@
     "title": "底层异常错误提示",
     "description": "调用报错时回复给用户的提示词。可用占位符: {e} 表示异常信息。",
     "default": "生成日记时出现错误，请联系管理员或查看后台日志。"
+  },
+  "webui_url": {
+    "type": "string",
+    "title": "WebUI 地址",
+    "description": "点击 /我的日记本 生成的长链接所指向的前端地址。",
+    "default": "https://jingshiro.github.io/dairy_note/"
   }
 }
